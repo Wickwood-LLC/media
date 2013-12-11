@@ -1,7 +1,8 @@
 name = Media
-description = Provides the core Media API
+description = Provides the core Media API.  WWM applied wysiwyg_summary-1995030-3.patch from https://drupal.org/comment/7421208#comment-7421208 to support for WYSIWYG in summary
 package = Media
 core = 7.x
+version = 7.x-1.x-dev-wmm
 dependencies[] = file_entity
 dependencies[] = image
 files[] = includes/MediaReadOnlyStreamWrapper.inc

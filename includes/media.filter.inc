@@ -238,14 +238,18 @@ function media_pre_render_text_format($element) {
   }
 
   $field = &$element['value'];
-  $settings = array(
-    'field' => $field['#id'],
-  );
-
   $tagmap = _media_generate_tagMap($field['#value']);
 
   if (isset($tagmap)) {
     drupal_add_js(array('tagmap' => $tagmap), 'setting');
+  }
+  
+  // If the field has a summary, parse that for media tags as well.
+  if (isset($element['summary'])) {
+    $summary_tagmap = _media_generate_tagMap($element['summary']['#value']);
+    if (isset($summary_tagmap)) {
+      drupal_add_js(array('tagmap' => $summary_tagmap), 'setting');
+    }
   }
   return $element;
 }

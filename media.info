@@ -8,4 +8,5 @@ dependencies[] = image
 files[] = includes/MediaReadOnlyStreamWrapper.inc
 files[] = test/media.types.test
 files[] = test/media.entity.test
+files[] = test/media.file.usage.test
 configure = admin/config/media/browser

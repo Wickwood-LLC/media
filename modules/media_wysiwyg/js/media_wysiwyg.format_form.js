@@ -63,6 +63,13 @@ Drupal.media.formatForm.getOptions = function () {
         // Encode the content to play nicely within JSON.
         ret[field.name] = encodeURIComponent(ret[field.name]);
       }
+      // Similar to the above WYSIWYG support, also support the Ckeditor module.
+      else if (typeof CKEDITOR !== 'undefined') {
+        if (CKEDITOR.instances[field.key]) {
+          ret[field.name] = CKEDITOR.instances[field.key].getData();
+          ret[field.name] = encodeURIComponent(ret[field.name]);
+        }
+      }
     }
   });
 

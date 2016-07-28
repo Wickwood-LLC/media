@@ -1163,9 +1163,15 @@ function media_file_displays_alter(&$displays, $file, $view_mode) {
   // Load alt and title text from fields.
   if (!empty($alt)) {
     $file->alt = token_replace($alt, array('file' => $file), $replace_options);
+    // Inform future code that we have done this override.
+    // @see media_wysiwyg_get_file_without_label().
+    $file->override['attributes']['alt'] = $file->alt;
   }
   if (!empty($title)) {
     $file->title = token_replace($title, array('file' => $file), $replace_options);
+    // Inform future code that we have done this override.
+    // @see media_wysiwyg_get_file_without_label().
+    $file->override['attributes']['title'] = $file->title;
   }
 }
 

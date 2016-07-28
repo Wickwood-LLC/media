@@ -251,6 +251,26 @@ function media_wysiwyg_filter_field_parser($tag_info) {
         $parsed_field = explode('[', str_replace(']', '', $field_name));
         $ref = &$fields;
 
+        // Certain types of fields, because of differences in markup, end up
+        // here with incomplete arrays. Make a best effort to support as many
+        // types of fields as possible.
+        // Single-value select lists show up here with only 2 array items.
+        if (count($parsed_field) == 2) {
+          $info = field_info_field($parsed_field[0]);
+          if ($info && !empty($info['columns'])) {
+            // Assume single-value.
+            $parsed_field[] = 0;
+            // Next tack on the column for this field.
+            $parsed_field[] = key($info['columns']);
+          }
+        }
+        // Multi-value select lists show up here with 3 array items.
+        elseif (count($parsed_field) == 3 && is_numeric($parsed_field[2])) {
+          $info = field_info_field($parsed_field[0]);
+          // They just need the value column.
+          $parsed_field[3] = key($info['columns']);
+        }
+
         // Each key of the field needs to be the child of the previous key.
         foreach ($parsed_field as $key) {
           if (!isset($ref[$key])) {

@@ -308,6 +308,16 @@ function _media_wysiwyg_wysiwyg_allowed_attributes_default() {
  * Optional custom settings can override how the file is displayed.
  */
 function media_wysiwyg_get_file_without_label($file, $view_mode, $settings = array(), $langcode = NULL) {
+  // If the file already has an override property for title and/or alt, let
+  // that override the $settings versions. This seems odd, but is needed to
+  // allow for fields to override alt/title, since that logic happens in
+  // another place. @see media_file_displays_alter().
+  if (!empty($file->override['attributes']['alt'])) {
+    $settings['attributes']['alt'] = $file->override['attributes']['alt'];
+  }
+  if (!empty($file->override['attributes']['title'])) {
+    $settings['attributes']['title'] = $file->override['attributes']['title'];
+  }
   $file->override = $settings;
 
   $element = file_view_file($file, $view_mode, $langcode);

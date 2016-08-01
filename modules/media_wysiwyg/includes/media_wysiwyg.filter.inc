@@ -191,6 +191,7 @@ function media_wysiwyg_token_to_markup($match, $wysiwyg = FALSE) {
     $element['#attributes']['data-fid'] = $file->fid;
     $element['#attributes']['data-media-element'] = '1';
     $element['#attributes']['class'][] = 'media-element';
+    $element['#attributes']['class'][] = 'align-center';
   }
   else {
     // Display the field elements.

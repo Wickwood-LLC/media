@@ -300,9 +300,8 @@ function media_wysiwyg_get_file_without_label($file, $view_mode, $settings = arr
   if (!empty($file->override['attributes']['title'])) {
     $settings['attributes']['title'] = $file->override['attributes']['title'];
   }
-  if (!empty($file->override['attributes']['class'])) {
-    $settings['attributes']['class'] = $file->override['attributes']['class'];
-  }
+  
+  $settings['attributes']['class'] = 'align-center';
 
   $file->override = $settings;
 

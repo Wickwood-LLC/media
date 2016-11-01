@@ -280,6 +280,7 @@ function _media_wysiwyg_wysiwyg_allowed_attributes_default() {
     'data-picture-group',
     'data-picture-align',
     'data-picture-mapping',
+    'data-delta',
   );
 }
 

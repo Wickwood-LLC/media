@@ -1141,12 +1141,26 @@ function media_file_displays_alter(&$displays, $file, $view_mode) {
     );
   }
 
+  $langcode = entity_language('file', $file);
+  $langcode = isset($langcode) ? $langcode : LANGUAGE_NONE;
+
   // Override the fields of the file when requested by the WYSIWYG.
   if (isset($file->override) && isset($file->override['fields'])) {
     $instance = field_info_instances('file', $file->type);
     foreach ($file->override['fields'] as $field_name => $value) {
       if (!isset($instance[$field_name]['settings']) || !isset($instance[$field_name]['settings']['wysiwyg_override']) || $instance[$field_name]['settings']['wysiwyg_override']) {
-        $file->{$field_name} = $value;}
+        $values = array($file->fid => $value[$langcode]);
+        $field = field_info_field($field_name);
+        // There was an issue happending when a taxonomy reference field is override.
+        // Taxonomy module requires field value to contain actual term object along to display the
+        // field correctly.
+        // So, we call hook_field_formatter_prepare_view() for each overriden field
+        // to make it sure fields are populated with correct values.
+        $function = $field['module'] . '_field_formatter_prepare_view';
+        if (function_exists($function)) {
+          $function('file', array($file->fid => $file), $field, array($file->fid => $instance[$field_name]), $langcode, $values, array($file->fid => $view_mode));
+        }
+        $file->{$field_name}[$langcode] = $values[$file->fid];}
     }
   }
 

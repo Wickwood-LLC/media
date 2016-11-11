@@ -12,7 +12,7 @@
  * is heavy-handed, and should be replaced when Drupal's filter system is
  * context-aware.
  */
-function media_wysiwyg_field_attach_insert($entity_type, $entity) {
+function media_wysiwyg_entity_insert($entity, $entity_type) {
   _media_wysiwyg_filter_add_file_usage_from_fields($entity_type, $entity);
 }
 
@@ -21,7 +21,7 @@ function media_wysiwyg_field_attach_insert($entity_type, $entity) {
  *
  * @see media_field_attach_insert().
  */
-function media_wysiwyg_field_attach_update($entity_type, $entity) {
+function media_wysiwyg_entity_update($entity, $entity_type) {
   _media_wysiwyg_filter_add_file_usage_from_fields($entity_type, $entity);
 }
 

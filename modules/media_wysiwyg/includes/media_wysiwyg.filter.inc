@@ -78,6 +78,21 @@ function media_wysiwyg_token_to_markup($match, $wysiwyg = FALSE, $langcode = NUL
     }
 
     $tag_info = drupal_json_decode($tag);
+    // Overriden field values in media tag are URL encoded to make
+    // them play within JSON format. Thus, values to be decoded
+    // before rendering file element from media tag.
+    if (isset($tag_info['fields'])) {
+      foreach ($tag_info['fields'] as $field_name => $value) {
+        $tag_info['fields'][$field_name] = urldecode($value);
+      }
+    }
+    if (isset($tag_info['field_deltas'])) {
+      foreach ($tag_info['field_deltas'] as &$d_value) {
+        foreach ($d_value as $field_name => $value) {
+          $d_value[$field_name] = urldecode($value);
+        }
+      }
+    }
 
     if (!isset($tag_info['fid'])) {
       throw new Exception('No file Id');

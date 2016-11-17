@@ -272,10 +272,14 @@
       else {
         info.field_deltas = {};
       }
+      if (!Drupal.settings.mediaDataMap[info.fid]) {
+        Drupal.settings.mediaDataMap[info.fid] = {};
+      }
+      Drupal.settings.mediaDataMap[info.fid].deltas = Drupal.settings.mediaDataMap[info.fid].deltas || {};
       info.field_deltas[delta] = info.fields;
       element.attr('data-delta', delta);
 
-      Drupal.settings.mediaDataMap[info.fid] = info;
+      Drupal.settings.mediaDataMap[info.fid].deltas[delta] = info;
 
       // Store the fid in the DOM to retrieve the data from the info map.
       element.attr('data-fid', info.fid);
@@ -332,6 +336,21 @@
         Drupal.media.filter.ensureDataMap();
 
         if (file_info = Drupal.settings.mediaDataMap[fid]) {
+          // When a file is embedded, its fields can be overridden. To allow for
+          // the edge case where the same file is embedded multiple times with
+          // different field overrides, we look for a data-delta attribute on
+          // the element, and use that to decide which set of data in the
+          // "field_deltas" property to use.
+          if (delta = element.data('delta')) {
+            if (Drupal.settings.mediaDataMap[fid].deltas && Drupal.settings.mediaDataMap[fid].deltas[delta]) {
+              file_info = Drupal.settings.mediaDataMap[fid].deltas[delta];
+
+              // Also look for an overridden view mode, aka "format".
+              if (file_info.fields.format && file_info.view_mode) {
+                file_info.view_mode = file_info.fields.format;
+              }
+            }
+          }
           file_info.attributes = {};
 
           $.each(Drupal.settings.media.wysiwyg_allowed_attributes, function(i, a) {
@@ -346,22 +365,6 @@
 
           // Extract the link text, if there is any.
           //file_info.link_text = element.find('a').html();
-
-          // When a file is embedded, its fields can be overridden. To allow for
-          // the edge case where the same file is embedded multiple times with
-          // different field overrides, we look for a data-delta attribute on
-          // the element, and use that to decide which set of data in the
-          // "field_deltas" property to use.
-          if (delta = element.data('delta')) {
-            if (file_info.field_deltas && file_info.field_deltas[delta]) {
-              file_info.fields = file_info.field_deltas[delta];
-
-              // Also look for an overridden view mode, aka "format".
-              if (file_info.fields.format && file_info.view_mode) {
-                file_info.view_mode = file_info.fields.format;
-              }
-            }
-          }
         }
       }
 

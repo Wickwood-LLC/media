@@ -217,6 +217,20 @@ function media_wysiwyg_token_to_markup($match, $wysiwyg = FALSE, $langcode = NUL
       'view_mode' => $tag_info['view_mode'],
       'link_text' => $tag_info['link_text'],
     );
+
+    // Set current maximum delta of a specific file.
+    // So, client side JS can identify next delta to be used when embedding same file.
+    static $mediaDeltas = array();
+    if (isset($tag_info['attributes']['data-delta'])) {
+      if (isset($mediaDeltas[$file->fid])) {
+        $mediaDeltas[$file->fid] = (int)max($mediaDeltas[$file->fid], $tag_info['attributes']['data-delta']);
+      }
+      else {
+        $mediaDeltas[$file->fid] = (int)$tag_info['attributes']['data-delta'];
+      }
+    }
+
+    drupal_add_js(array('mediaDeltas' => (object) $mediaDeltas), 'setting');
     drupal_add_js(array('mediaDataMap' => array($file->fid => $data)), 'setting');
     $element['#attributes']['data-fid'] = $file->fid;
     $element['#attributes']['data-media-element'] = '1';

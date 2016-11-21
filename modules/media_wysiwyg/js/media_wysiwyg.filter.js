@@ -346,7 +346,8 @@
               file_info = Drupal.settings.mediaDataMap[fid].deltas[delta];
 
               // Also look for an overridden view mode, aka "format".
-              if (file_info.fields.format && file_info.view_mode) {
+              // Check for existance of fields to make it backward compatible.
+              if (file_info.fields && file_info.fields.format && file_info.view_mode) {
                 file_info.view_mode = file_info.fields.format;
               }
             }

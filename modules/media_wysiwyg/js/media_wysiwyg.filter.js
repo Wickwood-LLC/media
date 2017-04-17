@@ -290,10 +290,15 @@
       }
       // Check for alignment info, after removing any existing alignment class.
       element.removeClass (function (index, css) {
-        return (css.match (/\bmedia-wysiwyg-align-\S+/g) || []).join(' ');
+        var classes_to_remove = css.match (/\bmedia-wysiwyg-align-\S+/g) || [];
+        classes_to_remove.concat(css.match (/\bmce-\S+/g) || []);
+        return classes_to_remove.join(' ');
       });
       if (info.fields && info.fields.alignment) {
         classes.push('media-wysiwyg-align-' + info.fields.alignment);
+      }
+      if (info.fields && info.fields['field_media_placement[und]']) {
+        classes.push(info.fields['field_media_placement[und]']);
       }
       element.addClass(classes.join(' '));
 
@@ -352,7 +357,10 @@
           });
 
           // Extract the link text, if there is any.
-          file_info.link_text = (Drupal.settings.mediaDoLinkText) ? element.find('a:not(:has(img))').html() : false;
+          // Comment out following line to cancel fix appeared from
+          // https://www.drupal.org/node/2139461 to make linking field from MCE to to work.
+          //file_info.link_text = (Drupal.settings.mediaDoLinkText) ? element.find('a:not(:has(img))').html() : false;
+
           // When a file is embedded, its fields can be overridden. To allow for
           // the edge case where the same file is embedded multiple times with
           // different field overrides, we look for a data-delta attribute on

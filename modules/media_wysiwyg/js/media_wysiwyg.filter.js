@@ -290,7 +290,9 @@
       }
       // Check for alignment info, after removing any existing alignment class.
       element.removeClass (function (index, css) {
-        return (css.match (/\bmedia-wysiwyg-align-\S+/g) || []).join(' ');
+        var classes_to_remove = css.match (/\bmedia-wysiwyg-align-\S+/g) || [];
+        classes_to_remove.concat(css.match (/\bmce-\S+/g) || []);
+        return classes_to_remove.join(' ');
       });
       if (info.fields && info.fields.alignment) {
         classes.push('media-wysiwyg-align-' + info.fields.alignment);
@@ -300,7 +302,7 @@
       // Attempt to override the link_title if the user has chosen to do this.
       info.link_text = this.overrideLinkTitle(info);
       // Apply link_text if present.
-      if ((info.link_text) && (!info.fields || !info.fields.external_url || info.fields.external_url.length === 0)) {
+      if (info.link_text) {
         $('a', element).html(info.link_text);
       }
 
@@ -352,7 +354,9 @@
           });
 
           // Extract the link text, if there is any.
-          file_info.link_text = (Drupal.settings.mediaDoLinkText) ? element.find('a:not(:has(img))').html() : false;
+          // Comment out following line to cancel fix appeared from
+          // https://www.drupal.org/node/2139461 to make linking field from MCE to to work.
+          //file_info.link_text = (Drupal.settings.mediaDoLinkText) ? element.find('a:not(:has(img))').html() : false;
           // When a file is embedded, its fields can be overridden. To allow for
           // the edge case where the same file is embedded multiple times with
           // different field overrides, we look for a data-delta attribute on

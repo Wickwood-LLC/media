@@ -1193,6 +1193,9 @@ function media_file_displays_alter(&$displays, $file, $view_mode) {
   if (!empty($title)) {
     $file->title = decode_entities(token_replace($title, array('file' => $file), $replace_options));
   }
+
+  // Reduce memory footprint and response size in media browser.
+  $file->file_contents = '';
 }
 
 /**

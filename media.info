@@ -22,4 +22,5 @@ files[] = tests/media.test
 configure = admin/config/media/browser
 
 ; We have to add a fake version so Git checkouts do not fail Media dependencies
-version = 7.x-2.x-dev
+version = "7.x-2.21"
+project = "media"

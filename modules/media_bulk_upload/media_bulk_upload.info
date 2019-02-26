@@ -14,3 +14,6 @@ test_dependencies[] = plupload
 
 files[] = includes/MediaBrowserBulkUpload.inc
 files[] = tests/media_bulk_upload.test
+
+version = "7.x-2.21"
+project = "media"

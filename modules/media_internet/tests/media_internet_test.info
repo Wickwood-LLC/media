@@ -6,3 +6,6 @@ hidden = TRUE
 
 files[] = includes/MediaInternetTestStreamWrapper.inc
 files[] = includes/MediaInternetTestHandler.inc
+
+version = "7.x-2.21"
+project = "media"

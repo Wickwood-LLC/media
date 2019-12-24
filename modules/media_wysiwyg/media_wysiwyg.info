@@ -15,3 +15,6 @@ files[] = tests/media_wysiwyg.macro.test
 files[] = tests/media_wysiwyg.paragraph_fix_filter.test
 
 configure = admin/config/media/browser
+
+version = "7.x-2.24"
+project = "media"

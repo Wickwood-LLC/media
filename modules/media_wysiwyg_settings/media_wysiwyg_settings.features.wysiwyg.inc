@@ -61,19 +61,42 @@ function media_wysiwyg_settings_wysiwyg_default_profiles() {
       'default_toolbar_grouping' => 0,
       'simple_source_formatting' => 0,
       'acf_mode' => 1,
-      'acf_allowed_content' => 'img[title,alt,src,data-cke-saved-src](wysiwyg-break,drupal-content);
+      'acf_allowed_content' => 'properties;
+table[class](*);
+tbody[class](*);
+tr[class](*);
+td[class,colspan](*);
+img[title,alt,src,data-cke-saved-src](wysiwyg-break,drupal-content);
 video[width,height,controls,src,controlslist,data-delta,data-fid,data-media-element](*);
 source[src,type,data-cke-saved-src];
 audio[controls,src](*);
-img[*](media-element,file-default);p[class](*);
-h2[class,style](*);
-h3[class,style](*);
-h4[class,style](*);
-h5[class,style](*);
-h6[class,style](*);
-div[class,style](*);
-span[class,style](*);
-code[class,style](*);',
+img[*](media-element,file-default,media-wysiwyg-align-right,media-wysiwyg-align-left,media-wysiwyg-align-center);
+p[class](*);
+audio[controls,src](*);
+b[class](*);
+p[class](default,fanc*,text-align*,Indent*);
+a[href,hreflang,data-entity-type,data-entity-uuid,title,target,class,tabindex](*);
+h1[class](*);
+h2[class](*);
+h3[class](*);
+h4[class](*);
+h5[class](*);
+h6[class](*);
+hr[class](*);
+div[class,aria-labelledby,data-parent,id](*);
+button[class,aria-controls,aria-expanded,data-target,data-toggle,type,id](*);
+sub[class](*);
+sup[class](*);
+strong[class](*);
+em[class](*);
+cite[class](*);
+footer[class](default);
+blockquote[class](*);
+ul[class,type](*);
+ol[class,start,type](*);
+span[!class](*);
+span[!lang](*);
+li[class](*);',
       'css_setting' => 'theme',
       'css_theme' => '',
       'css_path' => '',
@@ -148,19 +171,42 @@ code[class,style](*);',
       'default_toolbar_grouping' => 0,
       'simple_source_formatting' => 0,
       'acf_mode' => 0,
-      'acf_allowed_content' => 'img[title,alt,src,data-cke-saved-src](wysiwyg-break,drupal-content);
+      'acf_allowed_content' => 'properties;
+table[class](*);
+tbody[class](*);
+tr[class](*);
+td[class,colspan](*);
+img[title,alt,src,data-cke-saved-src](wysiwyg-break,drupal-content);
 video[width,height,controls,src,controlslist,data-delta,data-fid,data-media-element](*);
 source[src,type,data-cke-saved-src];
 audio[controls,src](*);
-img[*](media-element,file-default);p[class](*);
-h2[class,style](*);
-h3[class,style](*);
-h4[class,style](*);
-h5[class,style](*);
-h6[class,style](*);
-div[class,style](*);
-span[class,style](*);
-code[class,style](*);',
+img[*](media-element,file-default,media-wysiwyg-align-right,media-wysiwyg-align-left,media-wysiwyg-align-center);
+p[class](*);
+audio[controls,src](*);
+b[class](*);
+p[class](default,fanc*,text-align*,Indent*);
+a[href,hreflang,data-entity-type,data-entity-uuid,title,target,class,tabindex](*);
+h1[class](*);
+h2[class](*);
+h3[class](*);
+h4[class](*);
+h5[class](*);
+h6[class](*);
+hr[class](*);
+div[class,aria-labelledby,data-parent,id](*);
+button[class,aria-controls,aria-expanded,data-target,data-toggle,type,id](*);
+sub[class](*);
+sup[class](*);
+strong[class](*);
+em[class](*);
+cite[class](*);
+footer[class](default);
+blockquote[class](*);
+ul[class,type](*);
+ol[class,start,type](*);
+span[!class](*);
+span[!lang](*);
+li[class](*);',
       'css_setting' => 'theme',
       'css_theme' => '',
       'css_path' => '',

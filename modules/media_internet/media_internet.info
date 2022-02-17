@@ -11,3 +11,6 @@ files[] = includes/MediaInternetFileHandler.inc
 files[] = includes/MediaInternetNoHandlerException.inc
 files[] = includes/MediaInternetValidationException.inc
 files[] = tests/media_internet.test
+
+version = "7.x-2.27"
+project = "media"

@@ -7,3 +7,6 @@ hidden = TRUE
 dependencies[] = media
 
 configure = admin/structure/file-types/upgrade
+
+version = "7.x-2.27"
+project = "media"
